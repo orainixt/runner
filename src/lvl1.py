@@ -25,6 +25,8 @@ personnage = Personnage(100,300)
 # Gestion des obstacles du niveau 
 obstacleGround = Obstacle(0,660,"../ressources/ground.png")
 obstacleLarge1 = Obstacle(300,500,"../ressources/largeRectObst.png")
+obstacleLarge2 = Obstacle (600,300,"../ressources/largeRectObst.png")
+obstacleLarge3 = Obstacle (900,200,"../ressources/largeRectObst.png")
 
 running = True
 clock = pygame.time.Clock()
@@ -51,10 +53,23 @@ while running :
     #Dessine les obstacles 
     obstacleGround.dessiner(ecran)
     obstacleLarge1.dessiner(ecran)
+    obstacleLarge2.dessiner(ecran)
+    obstacleLarge3.dessiner(ecran)
+
 
     #Gestion des collisions : 
     if personnage.collisionObstacle(obstacleLarge1) : 
         personnage.y = obstacleLarge1.y - 120
+        personnage.velY = 0  # Arrête le saut du personnage
+        personnage.solTrue = True  # Indique que le personnage est sur le sol
+        
+    if personnage.collisionObstacle(obstacleLarge2) : 
+        personnage.y = obstacleLarge2.y - 120
+        personnage.velY = 0  # Arrête le saut du personnage
+        personnage.solTrue = True  # Indique que le personnage est sur le sol
+
+    if personnage.collisionObstacle(obstacleLarge3) : 
+        personnage.y = obstacleLarge3.y - 120
         personnage.velY = 0  # Arrête le saut du personnage
         personnage.solTrue = True  # Indique que le personnage est sur le sol
 

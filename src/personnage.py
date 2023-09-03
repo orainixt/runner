@@ -2,6 +2,7 @@ import pygame
 import sys
 import os 
 from obstacle import Obstacle
+from echap import *
 
 class Personnage : 
 
@@ -80,6 +81,10 @@ class Personnage :
             self.haut = False
             self.bas = True
             self.stay = False
+        
+        elif touches[pygame.K_ESCAPE] : 
+            escapeWindow = echap()
+            escapeWindow.executer()
 
         else : 
             self.gauche = False
