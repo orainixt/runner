@@ -1,13 +1,26 @@
 import pygame
+import sys
+import os 
 
 class Personnage : 
 
     def __init__(self) : 
         self.x = 0
         self.y = 0
-        self.taille = 50 
+        self.frames = [] # liste d'images pour l'animation
+        self.frameIndex = 0 #index de l'image actuelle
+        self.animationSpeed = 10 #vitesse de l'animation 
         self.vitesse = 5
-    
+        self.gauche = False 
+        self.droite = False
+
+        #Charger les images de l'animation 
+        dossierActuel = os.path.dirname(__file__)
+        stickmanWaitingPath = os.path.join(dossierActuel, "..","ressources","notMoving.png")
+        stickmanRightPath = os.path.join(dossierActuel, "..", "ressources","goingRight.png")
+        self.frames.append(pygame.image.load(stickmanWaitingPath))
+        self.frames.append(pygame.image.load(stickmanRightPath))
+
     def deplacer(self,touches) : 
         if touches[pygame.K_LEFT] : 
             self.x -= self.vitesse
