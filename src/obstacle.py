@@ -9,4 +9,4 @@ class Obstacle :
         self.longueur = longueur 
     
     def dessiner(self,fenetre) : 
-        
+        pygame.draw.rect(fenetre,(0,0,0),(self.x,self.y,self.largeur,self.longueur))
