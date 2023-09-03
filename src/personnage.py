@@ -1,6 +1,7 @@
 import pygame
 import sys
 import os 
+from obstacle import Obstacle
 
 class Personnage : 
 
@@ -95,6 +96,15 @@ class Personnage :
             self.solTrue = True
             self.velY = 0
     
+    def collisionObstacle(self,obstacle) :
+        if (
+        self.x < obstacle.x + obstacle.largeur and
+        self.x + self.frames[self.frameIndex].get_width() > obstacle.x and
+        self.y < obstacle.y + obstacle.longueur and
+        self.y + self.frames[self.frameIndex].get_height() > obstacle.y
+        ):
+            return True  # Collision détectée
+        return False
 
     def update(self,touches) : 
 

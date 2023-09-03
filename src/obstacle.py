@@ -11,6 +11,8 @@ class Obstacle :
         self.y = y
         imagePathComplet = os.path.join(dossierActuel,imagePath)
         self.image = pygame.image.load(imagePathComplet)
+        self.largeur = self.image.get_width()
+        self.longueur = self.image.get_height()
         
         
     def dessiner(self,ecran) : 
