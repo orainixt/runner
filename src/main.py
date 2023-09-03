@@ -21,7 +21,9 @@ pygame.display.set_caption(TITRE_ECRAN)
 
 # Création du perso 
 personnage = Personnage(100,300)
+
 # Gestion des obstacles du niveau 
+obstacleGround = Obstacle(0,660,"../ressources/ground.png")
 
 running = True
 clock = pygame.time.Clock()
@@ -44,6 +46,9 @@ while running :
 
     #Dessine le perso 
     personnage.dessiner(ecran)
+
+    #Dessine les obstacles 
+    obstacleGround.dessiner(ecran)
 
 
     #Affichage du jeu

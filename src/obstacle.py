@@ -1,12 +1,17 @@
 import pygame 
+import os
 
 class Obstacle : 
     
-    def __init__(self,x = 0,y = 0,largeur = 100, longueur = 100) : 
+    def __init__(self,x,y,imagePath) : 
+
+        dossierActuel = os.path.dirname(__file__)
+
         self.x = x 
         self.y = y
-        self.largeur = largeur
-        self.longueur = longueur 
-    
-    def dessiner(self,fenetre) : 
-        pygame.draw.rect(fenetre,(0,0,0),(self.x,self.y,self.largeur,self.longueur))
+        imagePathComplet = os.path.join(dossierActuel,imagePath)
+        self.image = pygame.image.load(imagePathComplet)
+        
+        
+    def dessiner(self,ecran) : 
+        ecran.blit(self.image,(self.x,self.y))

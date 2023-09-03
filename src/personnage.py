@@ -7,6 +7,9 @@ class Personnage :
     def __init__(self, x = 0,y=0) : 
         self.x = x
         self.y = y
+        self.gravite = 0
+        self.sol = 660 #hauteur du sol 
+        self.solTrue = False #indicateur si le perso touche le sol
         self.frames = [] # liste d'images pour l'animation
         self.frameIndex = 0 # index de l'image actuelle
         self.animationSpeed = 10 #vitesse de l'animation 
