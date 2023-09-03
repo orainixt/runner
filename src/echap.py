@@ -16,15 +16,13 @@ FPS = 60
 
 ## Création de la fenêtre 
 
-personnage = Personnage()
 
 ecran = pygame.display.set_mode((LARGEUR_ECRAN,HAUTEUR_ECRAN))
 pygame.display.set_caption(TITRE_ECRAN)
 
-dossierActuel = os.path.dirname(__file__)
-screenPath = os.path.join(dossierActuel,"..","ressource","echapScreen.png")
+dossierActuel = os.path.dirname(os.path.abspath(__file__))
+screenPath = os.path.join(dossierActuel, "..", "ressources", "echapScreen.png")
 imageBackground = pygame.image.load(screenPath)
-
 
 
 

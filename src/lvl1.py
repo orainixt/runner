@@ -1,6 +1,7 @@
 import pygame
 import sys
 
+from utils import update, collisionObstacle
 from personnage import Personnage
 from obstacle import Obstacle
 
@@ -31,6 +32,8 @@ obstacleLarge3 = Obstacle (900,200,"../ressources/largeRectObst.png")
 running = True
 clock = pygame.time.Clock()
 
+
+
 while running : 
 
     #Gestion des événements 
@@ -42,7 +45,8 @@ while running :
     #MAJ du jeu 
     # Gestion des mouvements du perso 
     touches = pygame.key.get_pressed()
-    personnage.update(touches)
+    update(personnage,touches)
+
 
     #Efface l'écran 
     ecran.fill(COULEUR_FOND)
@@ -58,17 +62,17 @@ while running :
 
 
     #Gestion des collisions : 
-    if personnage.collisionObstacle(obstacleLarge1) : 
+    if collisionObstacle(personnage,obstacleLarge1) : 
         personnage.y = obstacleLarge1.y - 120
         personnage.velY = 0  # Arrête le saut du personnage
         personnage.solTrue = True  # Indique que le personnage est sur le sol
         
-    if personnage.collisionObstacle(obstacleLarge2) : 
+    if collisionObstacle(personnage,obstacleLarge2) : 
         personnage.y = obstacleLarge2.y - 120
         personnage.velY = 0  # Arrête le saut du personnage
         personnage.solTrue = True  # Indique que le personnage est sur le sol
 
-    if personnage.collisionObstacle(obstacleLarge3) : 
+    if collisionObstacle(personnage,obstacleLarge3) : 
         personnage.y = obstacleLarge3.y - 120
         personnage.velY = 0  # Arrête le saut du personnage
         personnage.solTrue = True  # Indique que le personnage est sur le sol
