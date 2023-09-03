@@ -4,44 +4,84 @@ import os
 
 class Personnage : 
 
-    def __init__(self) : 
-        self.x = 0
-        self.y = 0
+    def __init__(self, x = 0,y=0) : 
+        self.x = x
+        self.y = y
         self.frames = [] # liste d'images pour l'animation
-        self.frameIndex = 0 #index de l'image actuelle
+        self.frameIndex = 0 # index de l'image actuelle
         self.animationSpeed = 10 #vitesse de l'animation 
         self.vitesse = 5
         self.gauche = False 
         self.droite = False
+        self.haut = False
+        self.bas = False 
 
         #Charger les images de l'animation 
         dossierActuel = os.path.dirname(__file__)
-        stickmanWaitingPath = os.path.join(dossierActuel, "..","ressources","notMoving.png")
+        stickmanLeftPath = os.path.join(dossierActuel, "..", "ressources","goingLeft.png")
         stickmanRightPath = os.path.join(dossierActuel, "..", "ressources","goingRight.png")
-        self.frames.append(pygame.image.load(stickmanWaitingPath))
+        stickmanUpPath = os.path.join(dossierActuel, "..", "ressources","jumping.png")
+        stickmanDownPath = os.path.join(dossierActuel, "..", "ressources","crawling.png")
+        #stickmanWaitingPath = os.path.join(dossierActuel, "..","ressources","notMoving.png")
+        
+        self.frames.append(pygame.image.load(stickmanLeftPath))
         self.frames.append(pygame.image.load(stickmanRightPath))
+        self.frames.append(pygame.image.load(stickmanUpPath))
+        self.frames.append(pygame.image.load(stickmanDownPath))
 
     def deplacer(self,touches) : 
         if touches[pygame.K_LEFT] : 
             self.x -= self.vitesse
-        if touches[pygame.K_RIGHT] :
+            self.gauche = True
+            self.droite = False 
+            self.haut = False
+            self.bas = False 
+        elif touches[pygame.K_RIGHT] :
             self.x += self.vitesse
-        if touches[pygame.K_UP] : 
+            self.gauche = False
+            self.droite = True 
+            self.haut = False
+            self.bas = False
+        elif touches[pygame.K_UP] : 
             self.y -= self.vitesse 
-        if touches[pygame.K_DOWN] : 
+            self.gauche = False
+            self.droite = False 
+            self.haut = True
+            self.bas = False
+        elif touches[pygame.K_DOWN] : 
             self.y += self.vitesse
+            self.gauche = False
+            self.droite = False 
+            self.haut = False
+            self.bas = True
+        else : 
+            self.gauche = False
+            self.droite = False 
+            self.haut = False
+            self.bas = False
     
-    def dessiner(self, fenetre) : 
-        # Dessine la tête
-        pygame.draw.circle(fenetre, (0, 0, 0), (self.x + self.taille // 2, self.y + self.taille // 4), self.taille // 4)
 
-        # Dessine le corps (ligne verticale)
-        pygame.draw.line(fenetre, (0, 0, 0), (self.x + self.taille // 2, self.y + self.taille // 2), (self.x + self.taille // 2, self.y + self.taille), 2)
+    def update(self,touches) : 
 
-        # Dessine les bras (lignes diagonales)
-        pygame.draw.line(fenetre, (0, 0, 0), (self.x + self.taille // 2, self.y + self.taille // 2), (self.x + self.taille // 4, self.y + self.taille), 2)
-        pygame.draw.line(fenetre, (0, 0, 0), (self.x + self.taille // 2, self.y + self.taille // 2), (self.x + 3 * self.taille // 4, self.y + self.taille), 2)
+        self.deplacer(touches)
 
-        # Dessine les jambes (lignes diagonales)
-        pygame.draw.line(fenetre, (0, 0, 0), (self.x + self.taille // 2, self.y + self.taille), (self.x + self.taille // 4, self.y + 3 * self.taille // 2), 2)
-        pygame.draw.line(fenetre, (0, 0, 0), (self.x + self.taille // 2, self.y + self.taille), (self.x + 3 * self.taille // 4, self.y + 3 * self.taille // 2), 2)
+        #Gestion de l'animation 
+        if self.gauche : 
+            #Animation pour la gauche 
+            self.frameIndex = 0 #Utiliser l'image 0
+        elif self.droite : 
+            self.frameIndex = 1 
+        elif self.haut : 
+            self.frameIndex = 2
+        elif self.bas : 
+            self.frameIndex = 3 
+
+
+    def dessiner(self,ecran) :
+
+        #Afficher l'image actuelle 
+        ecran.blit(self.frames[self.frameIndex],(self.x,self.y))
+
+
+
+

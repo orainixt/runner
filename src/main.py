@@ -19,15 +19,12 @@ FPS = 60
 ecran = pygame.display.set_mode((LARGEUR_ECRAN,HAUTEUR_ECRAN))
 pygame.display.set_caption(TITRE_ECRAN)
 
-#Création du perso 
-personnage = Personnage()
-
+# Création du perso 
+personnage = Personnage(100,300)
 # Gestion des obstacles du niveau 
-obstacles = [
-    (100,200),
-    (400,300)
-]
+
 running = True
+clock = pygame.time.Clock()
 
 while running : 
 
@@ -39,12 +36,8 @@ while running :
 
     #MAJ du jeu 
     # Gestion des mouvements du perso 
-    touche = pygame.key.get_pressed()
-    personnage.deplacer(touche)
-
-    #Gestion des obstacles :
-    for obstacle in obstacles : 
-        pygame.draw.rect(ecran, (0,0,0), (obstacle[0], obstacle[1], 50, 50))  # Exemple : obstacle en blanc
+    touches = pygame.key.get_pressed()
+    personnage.update(touches)
 
     #Efface l'écran 
     ecran.fill(COULEUR_FOND)
@@ -56,6 +49,7 @@ while running :
     #Affichage du jeu
     # Mets à jour l'affichage 
     pygame.display.flip()
+    clock.tick(FPS)
 
 pygame.quit()
 sys.exit()
