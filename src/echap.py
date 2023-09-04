@@ -5,7 +5,7 @@ from personnage import Personnage
 
 pygame.init()
 
-## Variables of the screen 
+# Variables nécessaires au chargement de la fenêtre 
 
 LARGEUR_ECRAN = 1280
 HAUTEUR_ECRAN = 720 
@@ -25,6 +25,12 @@ imageBackground = pygame.image.load(screenPath)
 
 
 def runEchap() : 
+    """
+    Méthode permettant de lancer la fenêtre de menu 
+
+    Returns :
+        returnGame (bool) vrai quand la méthode doit s'arrêter pour retourner au jeu
+    """
 
     running = True
     returnGame = False

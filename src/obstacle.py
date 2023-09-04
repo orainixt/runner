@@ -21,7 +21,15 @@ class Obstacle :
         self.image = pygame.image.load(imagePathComplet)
         self.largeur = self.image.get_width()
         self.longueur = self.image.get_height()
-        
+    
         
     def dessiner(self,ecran) : 
+
+        """
+        Méthode permettant de dessiner l'obstacle sur l'ecran en fonction de l'image importée 
+
+        Args : 
+            self (Obstacle) l'obstacle concerné 
+            ecran (pygame.display) l'ecran de jeu concerné 
+        """
         ecran.blit(self.image,(self.x,self.y))

@@ -5,6 +5,15 @@ import echap
 
 
 def collisionObstacle(personnage,obstacle) :
+        """
+        Méthode permettant de gérer la collision entre deux objets 
+
+        Args : 
+            personnage (Personnage) le joueur, il doit avoir des arguments x et y
+                                    il doit également avoir un tableau de frames correponsand aux animations
+            obstacle (Obstacle) l'obstacle, il doit aussi avoir des arguments x et y
+
+        """
         if (
         personnage.x < obstacle.x + obstacle.largeur and
         personnage.x + personnage.frames[personnage.frameIndex].get_width() > obstacle.x and
@@ -16,7 +25,14 @@ def collisionObstacle(personnage,obstacle) :
 
     
 def update(personnage,touches) : 
+        """
+        Méthode appelée à chaque tour de la boucle principale du jeu, permettant de déplacer le joueur 
+        et de choisir quelle frame d'animation utiliser (dossier "/ressources")
 
+        Args : 
+            personnage (Personnage) le joueur 
+            touches ([pygame.K]) le tableau de touches
+        """
         personnage.deplacer(touches)
 
         #Gestion de l'animation 

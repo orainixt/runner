@@ -8,7 +8,7 @@ from obstacle import Obstacle
 
 pygame.init()
 
-## Variables of the screen 
+# Variables nécessaires au chargement de la fenêtre 
 
 LARGEUR_ECRAN = 1280
 HAUTEUR_ECRAN = 720 
@@ -16,6 +16,9 @@ COULEUR_FOND = (255,255,255)
 TITRE_ECRAN = "DeathRunner"
 FPS = 60
 OPEN_NEXT_LVL = False
+ETAT_JEU = "ingame"
+running = True
+clock = pygame.time.Clock()
 
 # Création de la fenêtre 
 
@@ -35,12 +38,6 @@ obstacleGround = Obstacle(0,660,"../ressources/ground.png")
 obstacleLarge1 = Obstacle(300,500,"../ressources/largeRectObst.png")
 obstacleLarge2 = Obstacle (600,300,"../ressources/largeRectObst.png")
 obstacleLarge3 = Obstacle (900,200,"../ressources/largeRectObst.png")
-
-
-ETAT_JEU = "ingame"
-running = True
-clock = pygame.time.Clock()
-
 
 
 while running : 
