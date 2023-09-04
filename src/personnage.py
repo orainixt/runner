@@ -9,7 +9,7 @@ class Personnage :
     """
     Classe représentant le personnage, respresenté par un stickman 
 
-    Attributs : 
+    Attributes : 
         x (int) la coordonée x du personnage
         y (int) la coordonée y du personnage
         velY (int) la velocité de la gravité 
