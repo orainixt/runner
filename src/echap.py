@@ -1,5 +1,4 @@
 import pygame
-import sys
 import os
 
 from personnage import Personnage
@@ -25,12 +24,10 @@ screenPath = os.path.join(dossierActuel, "..", "ressources", "echapScreen.png")
 imageBackground = pygame.image.load(screenPath)
 
 
-
-# Gestion des obstacles du niveau 
-
 def runEchap() : 
 
     running = True
+    returnGame = False
 
     while running : 
 
@@ -39,6 +36,11 @@ def runEchap() :
 
             if event.type == pygame.QUIT : 
                 running = False
+            
+            if event.type == pygame.KEYDOWN : 
+                if event.key == pygame.K_ESCAPE : 
+                    returnGame = True 
+                    running = False 
 
         #MAJ du jeu 
 
@@ -55,4 +57,4 @@ def runEchap() :
         pygame.display.flip()
 
     pygame.quit()
-    sys.exit()
+    return returnGame

@@ -43,6 +43,7 @@ class Personnage :
         if self.solTrue : 
             self.velY = -20
             self.solTrue = False
+            
     def dessiner(self,ecran) :
 
         #Afficher l'image actuelle 
