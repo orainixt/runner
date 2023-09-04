@@ -39,10 +39,67 @@ class Personnage :
         self.frames.append(pygame.image.load(stickmanWaitPath))
 
 
+    def sauter(self) : 
+        if self.solTrue : 
+            self.velY = -20
+            self.solTrue = False
     def dessiner(self,ecran) :
 
         #Afficher l'image actuelle 
         ecran.blit(self.frames[self.frameIndex],(self.x,self.y))
+
+    def deplacer(self,touches) : 
+
+        if touches[pygame.K_LEFT] : 
+
+            self.x -= self.vitesse
+            self.gauche = True
+            self.droite = False 
+            self.haut = False
+            self.bas = False 
+            self.stay = False
+
+        elif touches[pygame.K_RIGHT] :
+
+            self.x += self.vitesse
+            self.gauche = False
+            self.droite = True 
+            self.haut = False
+            self.bas = False
+            self.stay = False
+
+        elif (touches[pygame.K_SPACE] or touches[pygame.K_UP]): 
+
+            self.sauter()
+            self.gauche = False
+            self.droite = False 
+            self.haut = True
+            self.bas = False
+            self.stay = False
+
+        elif touches[pygame.K_DOWN] : 
+
+            self.y += self.vitesse
+            self.gauche = False
+            self.droite = False 
+            self.haut = False
+            self.bas = True
+            self.stay = False
+
+        else : 
+            self.gauche = False
+            self.droite = False 
+            self.haut = False
+            self.bas = False
+            self.stay = True
+        
+        self.velY += self.GRAVITE
+        self.y += self.velY
+        
+        if self.y > self.sol: 
+            self.y = self.sol 
+            self.solTrue = True
+            self.velY = 0
 
 
 

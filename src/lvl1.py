@@ -4,6 +4,7 @@ import sys
 from utils import update, collisionObstacle
 from personnage import Personnage
 from obstacle import Obstacle
+import echap
 
 pygame.init()
 
@@ -45,7 +46,11 @@ while running :
     #MAJ du jeu 
     # Gestion des mouvements du perso 
     touches = pygame.key.get_pressed()
-    update(personnage,touches)
+    if touches[pygame.K_ESCAPE] : 
+        import echap
+        echap.runEchap()
+    else : 
+        update(personnage,touches)
 
 
     #Efface l'écran 
