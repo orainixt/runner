@@ -2,7 +2,6 @@ import pygame
 import sys
 import os 
 from obstacle import Obstacle
-from echap import *
 
 class Personnage : 
 
@@ -46,11 +45,11 @@ class Personnage :
 
         #Charger les images de l'animation 
         dossierActuel = os.path.dirname(__file__)
-        stickmanLeftPath = os.path.join(dossierActuel, "..", "ressources","goingLeft.png")
-        stickmanRightPath = os.path.join(dossierActuel, "..", "ressources","goingRight.png")
-        stickmanUpPath = os.path.join(dossierActuel, "..", "ressources","jumping.png")
-        stickmanDownPath = os.path.join(dossierActuel, "..", "ressources","crawling.png")
-        stickmanWaitPath = os.path.join(dossierActuel, "..", "ressources","notMoving.png")
+        stickmanLeftPath = os.path.join(dossierActuel, "..", "ressources","personnage","goingLeft.png")
+        stickmanRightPath = os.path.join(dossierActuel, "..", "ressources","personnage","goingRight.png")
+        stickmanUpPath = os.path.join(dossierActuel, "..", "ressources","personnage","jumping.png")
+        stickmanDownPath = os.path.join(dossierActuel, "..", "ressources","personnage","crawling.png")
+        stickmanWaitPath = os.path.join(dossierActuel, "..", "ressources","personnage","notMoving.png")
         
         self.frames.append(pygame.image.load(stickmanLeftPath))
         self.frames.append(pygame.image.load(stickmanRightPath))
@@ -140,6 +139,45 @@ class Personnage :
             self.solTrue = True
             self.velY = 0
 
+    def update(self,touches) :    
+        """
+        Méthode appelée à chaque tour de la boucle principale du jeu, permettant de déplacer le joueur 
+        et de choisir quelle frame d'animation utiliser (dossier "/ressources")
 
+        Args : 
+            self (Personnage) le joueur 
+            touches ([pygame.K]) le tableau de touches
+        """
+        self.deplacer(touches)
 
+        #Gestion de l'animation 
+        if self.gauche : 
+            #Animation pour la gauche 
+            self.frameIndex = 0 #Utiliser l'image 0
+        elif self.droite : 
+            self.frameIndex = 1 
+        elif self.haut : 
+            self.frameIndex = 2
+        elif self.bas : 
+            self.frameIndex = 3 
+        elif self.stay : 
+            self.frameIndex = 4
 
+    def collisionObstacle(self,obstacle) :
+        """
+        Méthode permettant de gérer la collision entre deux objets 
+
+        Args : 
+            self (Personnage) le joueur, il doit avoir des arguments x et y
+                                    il doit également avoir un tableau de frames correponsand aux animations
+            obstacle (Obstacle) l'obstacle, il doit aussi avoir des arguments x et y
+
+        """
+        if (
+        self.x < obstacle.x + obstacle.largeur and
+        self.x + self.frames[self.frameIndex].get_width() > obstacle.x and
+        self.y < obstacle.y + obstacle.longueur and
+        self.y + self.frames[self.frameIndex].get_height() > obstacle.y
+        ):
+            return True  # Collision détectée
+        return False

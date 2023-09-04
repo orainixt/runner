@@ -1,7 +1,7 @@
 import pygame
 import os
 
-from personnage import Personnage
+import lvl1
 
 pygame.init()
 
@@ -43,8 +43,9 @@ def runEchap() :
             if event.type == pygame.QUIT : 
                 running = False
             
-            if event.type == pygame.KEYDOWN : 
+            if event.type == pygame.KEYDOWN :
                 if event.key == pygame.K_ESCAPE : 
+                    lvl1.ETAT_JEU = "ingame"
                     returnGame = True 
                     running = False 
 
