@@ -15,6 +15,7 @@ HAUTEUR_ECRAN = 720
 COULEUR_FOND = (255,255,255)
 TITRE_ECRAN = "DeathRunner"
 FPS = 60
+OPEN_NEXT_LVL = False
 
 # Création de la fenêtre 
 
