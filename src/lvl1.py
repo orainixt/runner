@@ -6,6 +6,7 @@ import echap
 
 from personnage import Personnage
 from obstacleLvl import ObstacleLvl
+from obstacleNxtLvl import ObstacleNxtLvl
 
 
 pygame.init()
@@ -41,6 +42,9 @@ obstacleLarge1 = ObstacleLvl(300,500,"../ressources/global/largeRectObst.png")
 obstacleLarge2 = ObstacleLvl(600,300,"../ressources/global/largeRectObst.png")
 obstacleLarge3 = ObstacleLvl(900,200,"../ressources/global/largeRectObst.png")
 
+# Obstacle de fin de niveau
+obstacleEndLvl = ObstacleNxtLvl(1250,100,"../ressources/lvl/endLvl.png")
+
 
 while running : 
 
@@ -75,6 +79,7 @@ while running :
     obstacleLarge1.dessiner(ecran)
     obstacleLarge2.dessiner(ecran)
     obstacleLarge3.dessiner(ecran)
+    obstacleEndLvl.dessiner(ecran)
 
     #Gestion des collisions : 
     if personnage.collisionObstacle(obstacleLarge1) : 
@@ -91,6 +96,10 @@ while running :
         personnage.y = obstacleLarge3.y - 120
         personnage.velY = 0  # Arrête le saut du personnage
         personnage.solTrue = True  # Indique que le personnage est sur le sol
+
+    if personnage.collisionObstacle(obstacleEndLvl) : 
+        running = False
+
     if ECHAP : 
         gameMenu = echap.runEchap(ecran)
         if gameMenu : 

@@ -23,11 +23,12 @@ class Personnage :
         haut (bool) si le perso va en haut
         bas (bool) si le perso va en bas
         stay (bool) si le perso reste immobile
+        rect (pygame.Rect) est le rectangle qui encadre le personnage (utilisé pour la fin des niveaux)
     """
 
     GRAVITE = 1
 
-    def __init__(self, x = 0,y=550) : 
+    def __init__(self, x ,y) : 
         self.x = x
         self.y = y
         self.velY = 0
@@ -42,6 +43,7 @@ class Personnage :
         self.haut = False
         self.bas = False 
         self.stay = True
+        self.rect = pygame.Rect(x,y,120,120)
 
         #Charger les images de l'animation 
         dossierActuel = os.path.dirname(__file__)
