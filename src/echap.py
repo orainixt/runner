@@ -1,7 +1,6 @@
 import pygame
 import os
-
-import lvl1
+import sys
 
 pygame.init()
 
@@ -20,11 +19,11 @@ ecran = pygame.display.set_mode((LARGEUR_ECRAN,HAUTEUR_ECRAN))
 pygame.display.set_caption(TITRE_ECRAN)
 
 dossierActuel = os.path.dirname(os.path.abspath(__file__))
-screenPath = os.path.join(dossierActuel, "..", "ressources", "echapScreen.png")
+screenPath = os.path.join(dossierActuel, "..", "ressources","global", "echapScreen.png")
 imageBackground = pygame.image.load(screenPath)
 
 
-def runEchap() : 
+def runEchap(ecran) : 
     """
     Méthode permettant de lancer la fenêtre de menu 
 
@@ -45,7 +44,6 @@ def runEchap() :
             
             if event.type == pygame.KEYDOWN :
                 if event.key == pygame.K_ESCAPE : 
-                    lvl1.ETAT_JEU = "ingame"
                     returnGame = True 
                     running = False 
 

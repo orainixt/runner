@@ -2,8 +2,11 @@ import pygame
 import sys
 import os
 
+import echap
+
 from personnage import Personnage
-from obstacle import Obstacle
+from obstacleLvl import ObstacleLvl
+
 
 pygame.init()
 
@@ -15,7 +18,7 @@ COULEUR_FOND = (255,255,255)
 TITRE_ECRAN = "DeathRunner"
 FPS = 60
 OPEN_NEXT_LVL = False
-ETAT_JEU = "ingame"
+ECHAP = False
 running = True
 clock = pygame.time.Clock()
 
@@ -33,10 +36,10 @@ controlsPathAbsolute = pygame.image.load(controlsPath), (0,0)
 personnage = Personnage(100,300)
 
 # Gestion des obstacles du niveau 
-obstacleGround = Obstacle(0,660,"../ressources/global/ground.png")
-obstacleLarge1 = Obstacle(300,500,"../ressources/global/largeRectObst.png")
-obstacleLarge2 = Obstacle (600,300,"../ressources/global/largeRectObst.png")
-obstacleLarge3 = Obstacle (900,200,"../ressources/global/largeRectObst.png")
+obstacleGround = ObstacleLvl(0,660,"../ressources/global/ground.png")
+obstacleLarge1 = ObstacleLvl(300,500,"../ressources/global/largeRectObst.png")
+obstacleLarge2 = ObstacleLvl(600,300,"../ressources/global/largeRectObst.png")
+obstacleLarge3 = ObstacleLvl(900,200,"../ressources/global/largeRectObst.png")
 
 
 while running : 
@@ -47,63 +50,56 @@ while running :
         if event.type == pygame.QUIT : 
             running = False
 
-    if ETAT_JEU == "ingame" : 
+   #MAJ du jeu 
+    # Gestion des mouvements du perso 
 
-        #MAJ du jeu 
-        # Gestion des mouvements du perso 
-
-        touches = pygame.key.get_pressed()
-
-        if touches[pygame.K_ESCAPE] : 
-            ETAT_JEU = "menu"
-        else : 
-            personnage.update(touches)
-
-
-        #Efface l'écran 
-        ecran.fill(COULEUR_FOND)
-        
-        #Dessine le décor 
-        ecran.blit(controlsPathAbsolute[0], (0, 0)) 
-
-        #Dessine le perso 
-        personnage.dessiner(ecran)
-
-        #Dessine les obstacles 
-        obstacleGround.dessiner(ecran)
-        obstacleLarge1.dessiner(ecran)
-        obstacleLarge2.dessiner(ecran)
-        obstacleLarge3.dessiner(ecran)
-
-        #Gestion des collisions : 
-        if personnage.collisionObstacle(obstacleLarge1) : 
-            personnage.y = obstacleLarge1.y - 120
-            personnage.velY = 0  # Arrête le saut du personnage
-            personnage.solTrue = True  # Indique que le personnage est sur le sol
-        
-        if personnage.collisionObstacle(obstacleLarge2) : 
-            personnage.y = obstacleLarge2.y - 120
-            personnage.velY = 0  # Arrête le saut du personnage
-            personnage.solTrue = True  # Indique que le personnage est sur le sol
-
-        if personnage.collisionObstacle(obstacleLarge3) : 
-            personnage.y = obstacleLarge3.y - 120
-            personnage.velY = 0  # Arrête le saut du personnage
-            personnage.solTrue = True  # Indique que le personnage est sur le sol
-
-        #Affichage du jeu
-        # Mets à jour l'affichage 
-        pygame.display.flip()
-        clock.tick(FPS)
-
-    elif ETAT_JEU == "menu" : 
-        import echap
-        echap.runEchap()
-        if echap.runEchap() : 
-            ETAT_JEU = "menu"
-
-        
-
+    touches = pygame.key.get_pressed()
     
+    if touches[pygame.K_ESCAPE] : 
+        ECHAP = True
+    else : 
+        personnage.update(touches)
+
+
+    #Efface l'écran 
+    ecran.fill(COULEUR_FOND)
+        
+    #Dessine le décor 
+    ecran.blit(controlsPathAbsolute[0], (0, 0)) 
+
+    #Dessine le perso 
+    personnage.dessiner(ecran)
+
+    #Dessine les obstacles 
+    obstacleGround.dessiner(ecran)
+    obstacleLarge1.dessiner(ecran)
+    obstacleLarge2.dessiner(ecran)
+    obstacleLarge3.dessiner(ecran)
+
+    #Gestion des collisions : 
+    if personnage.collisionObstacle(obstacleLarge1) : 
+        personnage.y = obstacleLarge1.y - 120
+        personnage.velY = 0  # Arrête le saut du personnage
+        personnage.solTrue = True  # Indique que le personnage est sur le sol
+        
+    if personnage.collisionObstacle(obstacleLarge2) : 
+        personnage.y = obstacleLarge2.y - 120
+        personnage.velY = 0  # Arrête le saut du personnage
+        personnage.solTrue = True  # Indique que le personnage est sur le sol
+
+    if personnage.collisionObstacle(obstacleLarge3) : 
+        personnage.y = obstacleLarge3.y - 120
+        personnage.velY = 0  # Arrête le saut du personnage
+        personnage.solTrue = True  # Indique que le personnage est sur le sol
+    if ECHAP : 
+        gameMenu = echap.runEchap(ecran)
+        if gameMenu : 
+            ECHAP = False
+    #Affichage du jeu
+    # Mets à jour l'affichage 
+    pygame.display.flip()
+    clock.tick(FPS)
+
+
 pygame.quit()
 sys.exit()
