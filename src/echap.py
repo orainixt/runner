@@ -2,37 +2,29 @@ import pygame
 import os
 import sys
 
-pygame.init()
+def run() : 
 
-# Variables nécessaires au chargement de la fenêtre 
+    pygame.init()
 
-LARGEUR_ECRAN = 1280
-HAUTEUR_ECRAN = 720 
-COULEUR_FOND = (255,255,255)
-TITRE_ECRAN = "DeathRunner - Menu Screen"
-FPS = 60
+    # Variables nécessaires au chargement de la fenêtre 
 
-## Création de la fenêtre 
-
-
-ecran = pygame.display.set_mode((LARGEUR_ECRAN,HAUTEUR_ECRAN))
-pygame.display.set_caption(TITRE_ECRAN)
-
-dossierActuel = os.path.dirname(os.path.abspath(__file__))
-screenPath = os.path.join(dossierActuel, "..", "ressources","global", "echapScreen.png")
-imageBackground = pygame.image.load(screenPath)
-
-
-def runEchap(ecran) : 
-    """
-    Méthode permettant de lancer la fenêtre de menu 
-
-    Returns :
-        returnGame (bool) vrai quand la méthode doit s'arrêter pour retourner au jeu
-    """
-
+    LARGEUR_ECRAN = 1280
+    HAUTEUR_ECRAN = 720 
+    COULEUR_FOND = (255,255,255)
+    TITRE_ECRAN = "DeathRunner - Menu Screen"
+    FPS = 60
     running = True
     returnGame = False
+
+    # Création de la fenêtre 
+
+
+    ecran = pygame.display.set_mode((LARGEUR_ECRAN,HAUTEUR_ECRAN))
+    pygame.display.set_caption(TITRE_ECRAN)
+
+    dossierActuel = os.path.dirname(os.path.abspath(__file__))
+    screenPath = os.path.join(dossierActuel, "..", "ressources","global", "echapScreen.png")
+    imageBackground = pygame.image.load(screenPath)
 
     while running : 
 
