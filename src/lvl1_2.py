@@ -1,8 +1,7 @@
 import pygame
 import sys
-import os
 
-import echap
+import lvl2
 
 from personnage import Personnage
 from obstacleNxtLvl import ObstacleNxtLvl
@@ -20,7 +19,6 @@ def run() :
     COULEUR_FOND = (255,255,255)
     TITRE_ECRAN = "DeathRunner"
     FPS = 60
-    OPEN_NEXT_LVL = False
     ECHAP = False
     running = True
     clock = pygame.time.Clock()
@@ -38,10 +36,11 @@ def run() :
     # Gestion des obstacles du niveau 
     obstacleGround = ObstacleLvl(0,660,"../ressources/global/ground.png")
     obstacleTxt = ObstacleLvl(0,0,"../ressources/lvl/lvl1/textlvl1_2.png")
-    obstacleTxt2 = ObstacleLvl(630,0,"../ressources/lvl/lvl1/text2lvl1_2.png")
+    obstacleTxt2 = ObstacleLvl(800,0,"../ressources/lvl/lvl1/text2lvl1_2.png")
+    obstacleTxt3 = ObstacleLvl(700,200,"../ressources/lvl/lvl1/text3lvl1_2.png")
 
     # Obstacle de fin de niveau
-    obstacleEndLvl = ObstacleNxtLvl(100,200,"../ressources/lvl/endLvl.png")
+    obstacleEndLvl = ObstacleNxtLvl(1280,660,"../ressources/lvl/endLvl.png")
 
     while running : 
 
@@ -80,7 +79,12 @@ def run() :
         obstacleGround.dessiner(ecran)
         obstacleTxt.dessiner(ecran)
         obstacleTxt2.dessiner(ecran)
+        obstacleTxt3.dessiner(ecran)
+        obstacleEndLvl.dessiner(ecran)
 
+        if personnage.collisionObstacle(obstacleEndLvl) : 
+            lvl2.run()
+        
          # Gestion du menu Echap 
         if ECHAP : 
 
