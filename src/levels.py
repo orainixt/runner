@@ -2,6 +2,7 @@ import pygame
 
 import lvl1
 import lvl2
+import lvl3
 
 from obstacleButton import ObstacleButton
 def run() : 
@@ -37,6 +38,8 @@ def run() :
                     lvl1.run()
                 elif Olvl2.collision_point(event.pos) : 
                     lvl2.run()
+                elif Olvl3.collision_point(event.pos) : 
+                    lvl3.run()
 
         ecran.fill(COULEUR_FOND) 
 

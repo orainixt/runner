@@ -1,7 +1,7 @@
 import pygame
 import sys
 
-import lvl2_3
+import lvl3
 
 from personnage import Personnage
 from obstacleNxtLvl import ObstacleNxtLvl
@@ -14,8 +14,8 @@ def run() :
 
     # Variables nécessaires au chargement de la fenêtre 
 
-    LARGEUR_ECRAN = 1280
-    HAUTEUR_ECRAN = 720 
+    LARGEUR_ECRAN = 600 
+    HAUTEUR_ECRAN = 500
     COULEUR_FOND = (255,255,255)
     TITRE_ECRAN = "DeathRunner"
     FPS = 60
@@ -31,13 +31,21 @@ def run() :
     # Gestion des décors 
 
     # Création du perso 
-    personnage = Personnage(100,300)
+    personnage = Personnage(0,300)
 
     # Gestion des obstacles du niveau 
     obstacleGround = ObstacleLvl(0,660,"../ressources/global/ground.png")
+    obstacleTxtName = ObstacleLvl(0,0,"../ressources/lvl/lvl2/missingLetters5.png")
+    obstacleTxt = ObstacleLvl(400,0,"../ressources/lvl/lvl2/txtLvl2_2_1.png")
+    obstacleFirstLetter = ObstacleNxtLvl(100,600,"../ressources/lvl/endLvl.png")
+    obstacleSecondLetter = ObstacleNxtLvl(0,0,"../ressources/lvl/endLvl.png")
+    obstacleThirdLetter = ObstacleNxtLvl(0,0,"../ressources/lvl/endLvl.png")
+    obstacleFourthLetter = ObstacleNxtLvl(0,0,"../ressources/lvl/endLvl.png")
+    obstacleFifthLetter = ObstacleNxtLvl(0,0,"../ressources/lvl/endLvl.png")
+    obstacleEndLvl = ObstacleNxtLvl(0,0,"../ressources/lvl/endLvl.png")
 
     # Obstacle de fin de niveau
-    obstacleEndLvl = ObstacleNxtLvl(100,200,"../ressources/lvl/endLvl.png")
+
 
     while running : 
 
@@ -74,11 +82,39 @@ def run() :
 
         #Dessine les obstacles 
         obstacleGround.dessiner(ecran)
+        obstacleFirstLetter.dessiner(ecran)
+        obstacleTxt.dessiner(ecran)
+        obstacleTxtName.dessiner(ecran)
 
+        if personnage.collisionObstacle(obstacleFirstLetter) : 
+            obstacleTxtName = ObstacleLvl(0,0,"../ressources/lvl/lvl2/missingLetters4.png")
+            obstacleSecondLetter = ObstacleNxtLvl(500,600,"../ressources/lvl/endLvl.png")
+            obstacleFirstLetter = ObstacleNxtLvl(0,0,"../ressources/lvl/endLvl.png")
+
+        if personnage.collisionObstacle(obstacleSecondLetter) : 
+            obstacleTxtName = ObstacleLvl(0,0,"../ressources/lvl/lvl2/missingLetters3.png")
+            obstacleThirdLetter = ObstacleNxtLvl(0,600,"../ressources/lvl/endLvl.png")
+            obstacleSecondLetter = ObstacleNxtLvl(0,0,"../ressources/lvl/endLvl.png")
+
+        if personnage.collisionObstacle(obstacleThirdLetter) : 
+            obstacleTxtName = ObstacleLvl(0,0,"../ressources/lvl/lvl2/missingLetters2.png")
+            obstacleFourthLetter = ObstacleNxtLvl(500,600,"../ressources/lvl/endLvl.png")
+            obstacleThirdLetter = ObstacleNxtLvl(0,0,"../ressources/lvl/endLvl.png")
+
+        if personnage.collisionObstacle(obstacleFourthLetter) : 
+            obstacleTxtName = ObstacleLvl(0,0,"../ressources/lvl/lvl2/missingLetters1.png")
+            obstacleFifthLetter = ObstacleNxtLvl(500,600,"../ressources/lvl/endLvl.png")
+            obstacleFourthLetter = ObstacleNxtLvl(0,0,"../ressources/lvl/endLvl.png")
+
+        if personnage.collisionObstacle(obstacleFifthLetter) : 
+            obstacleTxtName = ObstacleLvl(0,0,"../ressources/lvl/lvl2/missingLetters0.png")
+            obstacleEndLvl = ObstacleNxtLvl(600,600,"../ressources/lvl/endLvl.png")
+            obstacleFifthLetter = ObstacleNxtLvl(0,0,"../ressources/lvl/endLvl.png")
+        
         if personnage.collisionObstacle(obstacleEndLvl) : 
-            lvl2.run()
+            lvl3.run()
 
-         # Gestion du menu Echap 
+        # Gestion du menu Echap 
         if ECHAP : 
 
             ecran.fill(COULEUR_FOND)

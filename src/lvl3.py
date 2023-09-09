@@ -6,7 +6,6 @@ from obstacleNxtLvl import ObstacleNxtLvl
 from obstacleLvl import ObstacleLvl
 from obstacleButton import ObstacleButton
 
-import lvl2_2
 
 def run() : 
 
@@ -22,7 +21,6 @@ def run() :
     ECHAP = False
     running = True
     clock = pygame.time.Clock()
-    lettersFalling = False
 
     # Création de la fenêtre 
 
@@ -36,9 +34,7 @@ def run() :
 
     # Gestion des obstacles du niveau 
     obstacleGround = ObstacleLvl(0,660,"../ressources/global/ground.png")
-    obstacleTxt1 = ObstacleLvl(0,0,"../ressources/lvl/lvl2/txtLvl2.png")
-    obstacleHouse = ObstacleLvl(680,0,"../ressources/lvl/lvl2/house.png")
-    obstacleTxt2 = ObstacleLvl(680,300,"../ressources/lvl/lvl2/txtLvl2_2.png")
+    obstacleTxtName = ObstacleLvl(0,0,"../ressources/lvl/lvl2/missingLetters0.png")
 
     # Obstacle de fin de niveau
     obstacleEndLvl = ObstacleNxtLvl(600,660,"../ressources/lvl/endLvl.png")
@@ -78,13 +74,7 @@ def run() :
 
         #Dessine les obstacles 
         obstacleGround.dessiner(ecran)
-        obstacleTxt1.dessiner(ecran)
-        obstacleTxt2.dessiner(ecran)
-        obstacleHouse.dessiner(ecran)
-
-        if personnage.collisionObstacle(obstacleEndLvl) : 
-            lvl2_2.run()
-
+        obstacleTxtName.dessiner(ecran)
          # Gestion du menu Echap 
         if ECHAP : 
 
