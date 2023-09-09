@@ -4,6 +4,7 @@ import pygame
 
 from obstacleButton import ObstacleButton
 import lvl1
+import levels
 
 def main():
 
@@ -20,7 +21,8 @@ def main():
     pygame.display.set_caption(TITRE_ECRAN)
 
 
-    start = ObstacleButton(500,300,"../ressources/global/start.png")
+    start = ObstacleButton(500,100,"../ressources/global/start.png")
+    lvl = ObstacleButton(500,300,"../ressources/global/level.png")
 
 
     while running : 
@@ -37,9 +39,13 @@ def main():
                     
                     lvl1.run()
 
+                if lvl.collision_point(event.pos) : 
+                    levels.run()
+
         ecran.fill(COULEUR_FOND)
 
         start.dessiner(ecran)
+        lvl.dessiner(ecran)
         pygame.display.flip()
 
 if __name__ == "__main__":

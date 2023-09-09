@@ -34,6 +34,9 @@ def run() :
 
     # Gestion des obstacles du niveau 
     obstacleGround = ObstacleLvl(0,660,"../ressources/global/ground.png")
+    obstacleTxt1 = ObstacleLvl(0,0,"../ressources/lvl/lvl2/txtLvl2.png")
+    obstacleHouse = ObstacleLvl(680,0,"../ressources/lvl/lvl2/house.png")
+    obstacleTxt2 = ObstacleLvl(680,300,"../ressources/lvl/lvl2/txtLvl2_2.png")
 
     # Obstacle de fin de niveau
     obstacleEndLvl = ObstacleNxtLvl(100,200,"../ressources/lvl/endLvl.png")
@@ -73,6 +76,9 @@ def run() :
 
         #Dessine les obstacles 
         obstacleGround.dessiner(ecran)
+        obstacleTxt1.dessiner(ecran)
+        obstacleTxt2.dessiner(ecran)
+        obstacleHouse.dessiner(ecran)
 
         if personnage.collisionObstacle(obstacleEndLvl) : 
             pass
@@ -91,7 +97,7 @@ def run() :
             buttonOption.dessiner(ecran)
             buttonResume.dessiner(ecran)
             buttonQuit.dessiner(ecran)
-    
+
 
         pygame.display.flip()
         clock.tick(FPS)
