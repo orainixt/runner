@@ -34,7 +34,10 @@ def run() :
 
     # Gestion des obstacles du niveau 
     obstacleGround = ObstacleLvl(0,660,"../ressources/global/ground.png")
-    obstacleTxtName = ObstacleLvl(0,0,"../ressources/lvl/lvl2/missingLetters0.png")
+    obstacleTxtName = ObstacleLvl(0,0,"../ressources/lvl/lvl3/txt1.png")
+    obstacleTxt = ObstacleLvl(200,0,"../ressources/lvl/lvl3/txt2.png")
+    obstacleVertical1 = ObstacleLvl(200,450,"../ressources/global/verticalObstacle1.png")
+    
 
     # Obstacle de fin de niveau
     obstacleEndLvl = ObstacleNxtLvl(600,660,"../ressources/lvl/endLvl.png")
@@ -75,6 +78,15 @@ def run() :
         #Dessine les obstacles 
         obstacleGround.dessiner(ecran)
         obstacleTxtName.dessiner(ecran)
+        obstacleTxt.dessiner(ecran)
+        obstacleVertical1.dessiner(ecran)
+
+        # Gestion des collisions 
+        if personnage.collisionObstacle(obstacleVertical1) : 
+            personnage.y = obstacleVertical1.y - 120
+            personnage.velY = 0  # Arrête le saut du personnage
+            personnage.solTrue = True  # Indique que le personnage est sur le sol
+
          # Gestion du menu Echap 
         if ECHAP : 
 
